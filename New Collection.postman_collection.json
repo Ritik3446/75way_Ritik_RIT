@@ -1,0 +1,204 @@
+{
+	"info": {
+		"_postman_id": "9a493d05-fff8-4e46-8988-9c9a3176ba2b",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32356205"
+	},
+	"item": [
+		{
+			"name": "examiner register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/examiner/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"examiner",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "examiner login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/examiner/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"examiner",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create exam/examiner",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\":\"What is 2+2*4?\",\n    \"alternatives\":[\n        {\n            \"text\":\"30\"\n        },\n        {\n            \"text\":\"15\"\n        },\n        {\n            \"text\":\"10\"\n        },\n        {\n            \"text\":\"16\"\n        }\n    ],\n    \"correct_option\":\"10\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/examiner/createexam",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"examiner",
+						"createexam"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getexam/examiner",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/examiner/getexam",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"examiner",
+						"getexam"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "student Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Ajtggghhh123\",\n    \"email\": \"jhkghjuy.com\",\n    \"password\": \"ggggggghjhj\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/student/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"student",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "student Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"jhkghjuy.com\",\n    \"password\": \"ggggggghjhj\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/student/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"student",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getexam/student",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "startexam",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "\"_id\": \"65a7afd45e11172f28bdb244\",",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"_id\": \"65a7afd45e11172f28bdb244\",\n    \"answer\":\"10\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/student/startexam",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"student",
+						"startexam"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
