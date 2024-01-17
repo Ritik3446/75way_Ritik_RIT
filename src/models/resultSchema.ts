@@ -18,12 +18,12 @@ const resultSchema = new mongoose.Schema({
         required: true,
         ref: "Role"
     }
-    
+
 });
 
-export const User = mongoose.model('User', resultSchema);
+export const Result = mongoose.model('Result', resultSchema);
 
-export default User;
+export default Result;
 
 
 
