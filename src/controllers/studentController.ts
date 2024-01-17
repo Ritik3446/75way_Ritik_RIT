@@ -66,4 +66,13 @@ export const startexam = async (req:any, res:any) => {
     }
 };
 
+export const getallanswers = async (req:any, res:any) => {
+    try {
+        const answers = await Answer.find();
+        return res.status(200).json(answers)
+    } catch (error) {
+        return res.status(500).json({"error":error})
+    }
+};
+
 export default router;

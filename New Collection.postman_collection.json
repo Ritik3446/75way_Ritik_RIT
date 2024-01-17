@@ -199,7 +199,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWE3YWQ2MDllZDQ0NmZhODA0NDQxOWIiLCJyb2xlIjoiU3R1ZGVudCIsImlhdCI6MTcwNTQ5Mjg4OX0.y_7HJuZrrKzzHIeifiZwkOQ3kyp2zLOMVuSM5YAjZb0",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWE3YWQ2MDllZDQ0NmZhODA0NDQxOWIiLCJyb2xlIjoiU3R1ZGVudCIsImlhdCI6MTcwNTQ5NDIyOH0.WgAQY6p8s2t7tRbTRyPEd3Q4zZGF2xA61e4OPb4ffLA",
 							"type": "string"
 						}
 					]
@@ -229,7 +229,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWE3YWQ2MDllZDQ0NmZhODA0NDQxOWIiLCJyb2xlIjoiU3R1ZGVudCIsImlhdCI6MTcwNTQ5Mjg4OX0.y_7HJuZrrKzzHIeifiZwkOQ3kyp2zLOMVuSM5YAjZb0",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWE3YWQ2MDllZDQ0NmZhODA0NDQxOWIiLCJyb2xlIjoiU3R1ZGVudCIsImlhdCI6MTcwNTQ5NDIyOH0.WgAQY6p8s2t7tRbTRyPEd3Q4zZGF2xA61e4OPb4ffLA",
 							"type": "string"
 						}
 					]
@@ -255,6 +255,36 @@
 					"path": [
 						"student",
 						"startexam"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getanswers/student",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWE3YWQ2MDllZDQ0NmZhODA0NDQxOWIiLCJyb2xlIjoiU3R1ZGVudCIsImlhdCI6MTcwNTQ5NDIyOH0.WgAQY6p8s2t7tRbTRyPEd3Q4zZGF2xA61e4OPb4ffLA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/student/getanswers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"student",
+						"getanswers"
 					]
 				}
 			},

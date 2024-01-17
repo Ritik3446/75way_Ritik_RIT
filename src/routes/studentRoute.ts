@@ -4,7 +4,7 @@ const router: Router = express.Router();
 import { authenticateStudent } from '../Middleware/authMiddleware';
 import { check, validationResult } from 'express-validator';
 
-import { register,login,getexam, startexam} from "../controllers/studentController";
+import { register,login,getexam, startexam, getallanswers} from "../controllers/studentController";
 router.post('/register',[
     check('email', 'Invalid email Address, must contain 8-30 character and proper format')
                     .isEmail().isLength({ min: 8, max: 30 }),
@@ -35,6 +35,10 @@ router.get('/getexam',authenticateStudent,(req: Request, res: Response) => {
 
 router.post('/startexam', authenticateStudent,(req: Request, res: Response) => {
     startexam(req, res);
+});
+
+router.get('/getanswers', authenticateStudent, (req: Request, res: Response) => {
+    getallanswers(req, res);
 });
 
 export default router;
