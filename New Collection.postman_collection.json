@@ -11,6 +11,15 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Ritik\",\n    \"email\":\"ritikdhimanup8\",\n    \"password\":\"Ritik@123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "http://localhost:3000/examiner/register",
 					"protocol": "http",
@@ -31,6 +40,15 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"ritikdhimanup8@gmail.com\",\n    \"password\":\"Ritik@123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "http://localhost:3000/examiner/login",
 					"protocol": "http",
@@ -49,6 +67,16 @@
 		{
 			"name": "create exam/examiner",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aW1lIjoiV2VkIEphbiAxNyAyMDI0IDE2OjE5OjAyIEdNVCswNTMwIChJbmRpYSBTdGFuZGFyZCBUaW1lKSIsInVzZXJJZCI6IjY1YTdhZDYwOWVkNDQ2ZmE4MDQ0NDE5YiIsImlhdCI6MTcwNTQ4ODU0Mn0.hKgeb2WzvAH7L-iF0ipBVMANjnpy3lAPig_zjNPDzpo",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -78,6 +106,16 @@
 		{
 			"name": "getexam/examiner",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWE3YWQ2MDllZDQ0NmZhODA0NDQxOWIiLCJyb2xlIjoiU3R1ZGVudCIsImlhdCI6MTcwNTQ4ODgxOX0.C3TPQBM7lBIEICRwRz1kFJdg4B1Y2Go6U1FPDxSCr3A",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -156,8 +194,30 @@
 		{
 			"name": "getexam/student",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWE3YWQ2MDllZDQ0NmZhODA0NDQxOWIiLCJyb2xlIjoiU3R1ZGVudCIsImlhdCI6MTcwNTQ5Mjg4OX0.y_7HJuZrrKzzHIeifiZwkOQ3kyp2zLOMVuSM5YAjZb0",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/student/getexam",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"student",
+						"getexam"
+					]
+				}
 			},
 			"response": []
 		},
@@ -169,7 +229,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "\"_id\": \"65a7afd45e11172f28bdb244\",",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWE3YWQ2MDllZDQ0NmZhODA0NDQxOWIiLCJyb2xlIjoiU3R1ZGVudCIsImlhdCI6MTcwNTQ5Mjg4OX0.y_7HJuZrrKzzHIeifiZwkOQ3kyp2zLOMVuSM5YAjZb0",
 							"type": "string"
 						}
 					]
@@ -178,7 +238,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"_id\": \"65a7afd45e11172f28bdb244\",\n    \"answer\":\"10\"\n}",
+					"raw": "{\n    \"id\":\"65a7a3017a482055a5ff0b6f\",\n    \"answer\":\"10\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"

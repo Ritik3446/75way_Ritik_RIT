@@ -54,8 +54,9 @@ export const getexam = async (req:any, res:any) => {
 
 export const startexam = async (req:any, res:any) => {
     try {
+        
         const answer = new Answer({
-            _id : req.body._id,
+            id : req.body.id,
             answer: req.body.answer
         });
         await answer.save();
