@@ -13,7 +13,6 @@ export const authenticateExaminer = (req:Request, res:Response, next:NextFunctio
             if(user.role == "Examiner"){
                 next();
             }else{
-                next();
                 return res.status(404).json({
                     "msg": "This page is accessible to Examiner only"
                 });
@@ -30,7 +29,8 @@ export const authenticateStudent = (req:Request, res:Response, next:NextFunction
     const authHeader = req.headers.authorization;
     if (authHeader) {
         const token = authHeader.split(' ')[1];
-        const user = jwt.verify(token, 'secretkeyrick' ) as any;
+        const user = jwt.verify(token , 'secretkeyrick' ) as any;
+        res.locals.user = user;
         if(!user){
             return res.status(403).json({
                 "msg": "User not found"
@@ -39,7 +39,6 @@ export const authenticateStudent = (req:Request, res:Response, next:NextFunction
             if(user.role == "Student"){
                 next();
             }else{
-                next();
                 return res.status(404).json({
                     "msg": "This page is accessible to Students only"
                 });

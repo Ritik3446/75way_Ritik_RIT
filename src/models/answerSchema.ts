@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 export const AnswerSchema = new mongoose.Schema({
-    id: {
+    question_id:{
         type: String,
         required: true
     },

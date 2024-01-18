@@ -10,8 +10,8 @@ router.post('/register',[
                     .isEmail().isLength({ min: 8, max: 30 }),
     check('name', 'Name length should of maximum 20 characters')
                     .isLength({  max: 20 }),
-    check('password', 'Password length should be 8 to 10 characters')
-                    .isLength({ min: 8, max: 10 })
+    check('password', 'Password length should be minimum 8 and should contain one uppercase one lowercase and one special character')
+                    .isLength({ min: 8 }).isStrongPassword()
 ], (req: Request, res: Response) => {
     const errors = validationResult(req);
  
@@ -30,10 +30,18 @@ router.post('/login', (req: Request, res: Response) => {
 });
 
 router.post('/createExam',authenticateExaminer, (req: Request, res: Response) => {
-    createexam(req, res);
+    const errors = validationResult(req);
+ 
+    // If some error occurs, then this
+    // block of code will run
+    if (!errors.isEmpty()) {
+        res.json(errors)
+    }else{
+        createexam(req, res);
+    }  
 });
 
-router.get('/getexam',authenticateExaminer, (req: Request, res: Response) => {
+router.post('/getexam',authenticateExaminer, (req: Request, res: Response) => {
     getexam(req, res);
 });
 

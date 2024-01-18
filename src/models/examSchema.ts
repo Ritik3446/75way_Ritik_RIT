@@ -1,21 +1,18 @@
+import { QuestionSchema } from './questionSchema';
 import mongoose from 'mongoose';
 
-export const QuestionSchema = new mongoose.Schema({
-    description: String,
-    alternatives: [
-        {
-            text: {
-                type: String,
-                required: true
-            },
-        }
-    ],
-    correct_option :{
+export const examSchema = new mongoose.Schema({
+    questionset:{
+        type:[QuestionSchema],
+        default:undefined,
+        required:true
+    },
+    totalMarks :{
         type:String,
         required: true
     }
 })
 
-export const Question = mongoose.model('Question', QuestionSchema);
+export const Exam = mongoose.model('Exam', examSchema);
 
-export default Question;
+export default Exam;
