@@ -6,8 +6,7 @@ import { check, validationResult } from 'express-validator';
 
 //controllers import
 import { register,login,getexam, submitexam, getallanswers} from "../controllers/studentController";
-import { generateresult } from '../controllers/resultController';
-import { getresult } from '../controllers/resultController';
+import { generateresult, getresult } from '../controllers/resultController';
 
 //routes
 router.post('/register',[

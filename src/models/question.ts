@@ -19,8 +19,3 @@ export const QuestionSchema = new mongoose.Schema({
         required:true
     }
 })
-
-
-export const Question = mongoose.model('Question', QuestionSchema);
-
-export default Question;

@@ -11,7 +11,3 @@ export const AnswerSchema = new mongoose.Schema({
         required: true
     }
 });
-
-export const Answer = mongoose.model('Answer', AnswerSchema);
-
-export default Answer;

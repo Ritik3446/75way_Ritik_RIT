@@ -4,10 +4,11 @@ import { authenticateExaminer } from '../Middleware/authMiddleware';
 const router: Router = express.Router();
 import { check, validationResult } from 'express-validator';
 
-//routes
+//Controllers import
 import { register, login, createexam, getexam, } from "../controllers/examinerController";
 import { getallresult } from '../controllers/resultController';
 
+//routes
 router.post('/register',[
     check('email', 'Invalid email Address, must contain 8-30 character')
                     .isEmail().isLength({ min: 8, max: 30 }),
