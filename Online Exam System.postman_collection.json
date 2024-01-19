@@ -1,0 +1,454 @@
+{
+	"info": {
+		"_postman_id": "9a493d05-fff8-4e46-8988-9c9a3176ba2b",
+		"name": "Online Exam System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32356205"
+	},
+	"item": [
+		{
+			"name": "examiner register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Ritik\",\n    \"email\":\"ritik@gmail.com\",\n    \"password\":\"Ritik@123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/examiner/register",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"examiner",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "examiner login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let adata = pm.response.json()",
+							"pm.environment.set(\"access\", adata.access)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"email\":\"ritik@gmail.com\",\n    \"password\":\"Ritik@123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/examiner/login",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"examiner",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create exam/examiner",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let adata = pm.response.json()",
+							"pm.environment.set(\"exam_id\", adata.data._id)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"questionset\": [\n    {\n      \"description\": \"what is 2+2*4\",\n      \"alternatives\": [\n        {\n          \"option\": \"30\"\n        },\n        {\n          \"option\": \"15\"\n        },\n        {\n          \"option\": \"10\"\n        },\n        {\n          \"option\": \"12\"\n        }\n      ],\n      \"correct_option\": \"10\",\n      \"marks\":10\n    },\n    {\n      \"description\": \"what is 2+2+6\",\n      \"alternatives\": [\n        {\n          \"option\": \"30\"\n        },\n        {\n          \"option\": \"15\"\n        },\n        {\n          \"option\": \"10\"\n        },\n        {\n          \"option\": \"12\"\n        }\n      ],\n      \"correct_option\": \"10\",\n      \"marks\":20\n    }\n  ],\n  \"totalMarks\": 30,\n  \"duration\": 60\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/examiner/createexam",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"examiner",
+						"createexam"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getexam/examiner",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"_id\":\"65a91129dd4cfdd034282578\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/examiner/getexam/{{exam_id}}",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"examiner",
+						"getexam",
+						"{{exam_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getresult/examiner",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/examiner/getresult/{{exam_id}}",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"examiner",
+						"getresult",
+						"{{exam_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "student Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Ayush\",\n    \"email\": \"ayush@gmail.com\",\n    \"password\": \"Ritik@123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/student/register",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"student",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "student Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let adata = pm.response.json()",
+							"pm.environment.set(\"access\", adata.access)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"fgfgd@gg.com\",\n    \"password\": \"Ritik@123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/student/login",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"student",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getexam/student",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/student/getexam/{{exam_id}}",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"student",
+						"getexam",
+						"{{exam_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "submitexam",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"answerset\":[\n        {\n            \"question_id\":\"65aa54bed3670c672855a879\",\n            \"answer\":\"10\"\n        },\n        {\n            \"question_id\":\"65aa54bed3670c672855a87e\",\n            \"answer\":\"11\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/student/submitexam/{{exam_id}}",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"student",
+						"submitexam",
+						"{{exam_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getanswers/student",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/student/getanswers/{{exam_id}}",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"student",
+						"getanswers",
+						"{{exam_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "generateresult/student",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/student/generateresult/{{exam_id}}",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"student",
+						"generateresult",
+						"{{exam_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getresult/student",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/student/getresult/{{exam_id}}",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"student",
+						"getresult",
+						"{{exam_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
