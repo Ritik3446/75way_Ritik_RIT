@@ -1,27 +1,29 @@
-import { User } from '../models/userSchema';
-import { Question } from '../models/questionSchema';
-import { Exam } from '../models/examSchema';
-const express = require('express');
+import { User } from '../models/user';
+import { Exam } from '../models/exam';
+import express from 'express';
 const router = express.Router();
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+
 export const register = async (req: any, res: any) => {
     // Check if this user already exisits
-    let user = await User.findOne({ email: req.body.email });
-    if (user) {
+    let examiner = await User.findOne({ email: req.body.email });
+    if (examiner) {
         return res.status(400).send('That user already exisits!');
     } else {
         const hashpassword = bcrypt.hashSync(req.body.password, 10);
         const role = "Examiner";
         // Insert the new user if they do not exist yet
-        user = new User({
+        examiner = new User({
             name: req.body.name,
             email: req.body.email,
             password: hashpassword,
             role
         });
-        await user.save();
-        res.send(user);
+        await examiner.save();
+        res.status(200).json({
+            "examiner": examiner
+        });
     }
 };
 
@@ -39,9 +41,9 @@ export const login = async (req: any, res: any) => {
                 }
                 const token = jwt.sign(data, jwtSecretKey);
                 res.status(200).json({
-                    "access":token
+                    "access": token
                 });
-            } 
+            }
             return res.status(401).json('Wrong password entered');
 
 
@@ -50,22 +52,26 @@ export const login = async (req: any, res: any) => {
         }
 
     } catch (error) {
-        console.log(error)
+        return res.status(500).json({ "error": error })
     }
 
 };
 
 export const createexam = async (req: any, res: any) => {
     try {
-        const { questionset } = req.body
-        const { totalMarks } = req.body
+        const questionset = req.body.questionset;
+        const totalMarks = req.body.totalMarks;
+        const duration = req.body.duration;
 
-        const exam = await Exam.create({
+        const savedexam = await Exam.create({
             questionset,
-            totalMarks
+            totalMarks,
+            duration,
         })
-
-        return res.status(201).json("question crteated successfully!!")
+        return res.status(201).json({
+            "msg": "Exam crteated successfully!!",
+            "data": savedexam
+        });
     } catch (error) {
         return res.status(500).json({ "error": error })
     }
@@ -73,9 +79,11 @@ export const createexam = async (req: any, res: any) => {
 
 export const getexam = async (req: any, res: any) => {
     try {
-        const exam = await Exam.findById(req.body._id);
+        const {exam_id} = req.params;
+        console.log(exam_id)
+        const exam = await Exam.findById(exam_id);
         return res.status(200).json({
-            "exam":exam
+            "exam": exam
         })
     } catch (error) {
         return res.status(500).json({ "error": error })

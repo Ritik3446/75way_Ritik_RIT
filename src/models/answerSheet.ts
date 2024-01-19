@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
-import { AnswerSchema } from './answerSchema';
+import { AnswerSchema } from './answer';
 
-export const answerSheet = new mongoose.Schema({
-    Exam_id: {
+export const sheetSchema = new mongoose.Schema({
+    exam_id: {
         type: String,
         required: true
     },
@@ -16,6 +16,6 @@ export const answerSheet = new mongoose.Schema({
     },
 });
 
-export const submitSchema = mongoose.model('submitSchema', answerSheet);
+export const answerSheet = mongoose.model('answerSheet', sheetSchema);
 
-export default submitSchema;
+export default answerSheet;

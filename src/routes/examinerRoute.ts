@@ -3,7 +3,10 @@ import { Request, Response } from 'express';
 import { authenticateExaminer } from '../Middleware/authMiddleware';
 const router: Router = express.Router();
 import { check, validationResult } from 'express-validator';
-import { register, login, createexam, getexam } from "../controllers/examinerController";
+
+//routes
+import { register, login, createexam, getexam, } from "../controllers/examinerController";
+import { getallresult } from '../controllers/resultController';
 
 router.post('/register',[
     check('email', 'Invalid email Address, must contain 8-30 character')
@@ -14,7 +17,7 @@ router.post('/register',[
                     .isLength({ min: 8 }).isStrongPassword()
 ], (req: Request, res: Response) => {
     const errors = validationResult(req);
- 
+
     // If some error occurs, then this
     // block of code will run
     if (!errors.isEmpty()) {
@@ -22,7 +25,7 @@ router.post('/register',[
     }else{
         register(req, res);
     }
-    
+
 });
 
 router.post('/login', (req: Request, res: Response) => {
@@ -30,19 +33,15 @@ router.post('/login', (req: Request, res: Response) => {
 });
 
 router.post('/createExam',authenticateExaminer, (req: Request, res: Response) => {
-    const errors = validationResult(req);
- 
-    // If some error occurs, then this
-    // block of code will run
-    if (!errors.isEmpty()) {
-        res.json(errors)
-    }else{
         createexam(req, res);
-    }  
 });
 
-router.post('/getexam',authenticateExaminer, (req: Request, res: Response) => {
+router.get('/getexam/:exam_id',authenticateExaminer, (req: Request, res: Response) => {
     getexam(req, res);
 });
+
+router.get('/getresult/:exam_id', authenticateExaminer, (req:any,res:any) =>{
+    getallresult(req,res);
+})
 
 export default router;

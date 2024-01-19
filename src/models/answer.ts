@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb';
 import mongoose from 'mongoose';
 
 export const AnswerSchema = new mongoose.Schema({

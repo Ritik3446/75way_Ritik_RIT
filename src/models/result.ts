@@ -5,7 +5,11 @@ const resultSchema = new mongoose.Schema({
         type:String,
         required: true,
     },
-    studentid:{
+    exam_id:{
+        type:String,
+        required:true
+    },
+    student_id:{
         type:String,
         required: true
     },
@@ -18,7 +22,6 @@ const resultSchema = new mongoose.Schema({
         required: true,
         ref: "Role"
     }
-
 });
 
 export const Result = mongoose.model('Result', resultSchema);

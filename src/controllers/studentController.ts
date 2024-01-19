@@ -1,7 +1,6 @@
-import { User } from '../models/userSchema';
-import { Exam } from '../models/examSchema';
-import {Answer } from '../models/answerSchema'
-import { submitSchema } from '../models/answerSheet';
+import { User } from '../models/user';
+import { Exam } from '../models/exam';
+import { answerSheet } from '../models/answerSheet';
 import jwt from 'jsonwebtoken';
 import bcrypt, { hash } from 'bcryptjs';
 import express from 'express';
@@ -26,7 +25,7 @@ export const register = async (req: any, res: any) => {
         });
         await student.save();
         res.status(200).json({
-            "examiner": student
+            "student": student
         });
     }
 };
@@ -56,35 +55,64 @@ export const login = async (req: any, res: any) => {
 };
 
 export const getexam = async (req: any, res: any) => {
+    const {exam_id} = req.params;
     try {
-        const exam = await Exam.findById(req.body._id);
-        return res.status(200).json({
-            "exam": exam
-        })
+        const exam = await Exam.findById(exam_id);
+        if(exam){
+            const {questionset, totalMarks} = exam;
+            return res.status(200).json({
+                "exam":{
+                    questionset,
+                    totalMarks,
+                    exam_id,
+                    remaining_time : exam.duration
+                }
+            })
+        }
+        return res.status(401).json('exam not found with given exam id')
     } catch (error) {
         return res.status(500).json({ "error": error })
     }
 };
 
-export const startexam = async (req: any, res: any) => {
+export const submitexam = async (req: any, res: any) => {
+    const {exam_id} = req.params;
+    const exam:any = await Exam.findById(exam_id);
+    if(exam){
+        const alreadySubmitted = await answerSheet.findOne({student_id:res.locals.user.userId});
 
-    try {
-        const answer = new submitSchema({
-            Exam_id: req.body.Exam_id,
-            student_id: res.locals.user.userId,
-            answerset: req.body.answerset
-        });
-        await answer.save();
-        res.send(answer);
-    } catch (error) {
-        return res.status(500).json({ "error": error })
+        if(!alreadySubmitted){
+            try {
+                const answer = new answerSheet({
+                    exam_id: exam_id,
+                    student_id: res.locals.user.userId,
+                    answerset: req.body.answerset
+                });
+                await answer.save();
+                return res.status(200).json({
+                    "answer":answer
+                });
+            } catch (error) {
+                return res.status(500).json({ "error": error })
+            }
+        }
+        return res.status(500).json({"msg":'Your exam has been submitted already! Click on getanswers to see your answers'});
     }
+    return res.status(401).json({'No Exam found with the entered Exam_id':req.body.Exam_id});
 };
 
 export const getallanswers = async (req: any, res: any) => {
+    const {exam_id} = req.params;
     try {
-        const answers = await Answer.find({ student_id: res.locals.user.userId });
-        return res.status(200).json(answers)
+        const answers = await answerSheet.findOne({exam_id:exam_id,student_id:res.locals.user.userId});
+        if(answers){
+            return res.status(200).json({
+                "answers":answers
+            })
+        }
+        return res.status(401).json({
+            "msg":"exam not submitted"
+        })
     } catch (error) {
         return res.status(500).json({ "error": error })
     }

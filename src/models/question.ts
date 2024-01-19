@@ -13,6 +13,10 @@ export const QuestionSchema = new mongoose.Schema({
     correct_option :{
         type:String,
         required: true
+    },
+    marks:{
+        type:Number,
+        required:true
     }
 })
 

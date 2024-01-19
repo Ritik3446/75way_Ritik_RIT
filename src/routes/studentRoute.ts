@@ -4,7 +4,12 @@ const router: Router = express.Router();
 import { authenticateStudent } from '../Middleware/authMiddleware';
 import { check, validationResult } from 'express-validator';
 
-import { register,login,getexam, startexam, getallanswers} from "../controllers/studentController";
+//controllers import
+import { register,login,getexam, submitexam, getallanswers} from "../controllers/studentController";
+import { generateresult } from '../controllers/resultController';
+import { getresult } from '../controllers/resultController';
+
+//routes
 router.post('/register',[
     check('email', 'Invalid email Address, must contain 8-30 character and proper format')
                     .isEmail().isLength({ min: 8, max: 30 }),
@@ -14,7 +19,7 @@ router.post('/register',[
                     .isLength({ min: 8, max: 10 }).isStrongPassword()
 ], (req: Request, res: Response) => {
     const errors = validationResult(req);
- 
+
     // If some error occurs, then this
     // block of code will run
     if (!errors.isEmpty()) {
@@ -22,23 +27,31 @@ router.post('/register',[
     }else{
         register(req, res);
     }
-    
+
 });
 
 router.post('/login', (req: Request, res: Response) => {
   login(req, res);
 });
 
-router.get('/getexam',authenticateStudent,(req: Request, res: Response) => {
+router.post('/getexam/:exam_id',authenticateStudent,(req: Request, res: Response) => {
     getexam(req, res);
 });
 
-router.post('/startexam', authenticateStudent,(req: Request, res: Response) => {
-    startexam(req, res);
+router.post('/submitexam/:exam_id', authenticateStudent,(req: Request, res: Response) => {
+    submitexam(req, res);
 });
 
-router.post('/getanswers', authenticateStudent, (req: Request, res: Response) => {
+router.get('/getanswers/:exam_id', authenticateStudent, (req: Request, res: Response) => {
     getallanswers(req, res);
+});
+
+router.post('/generateresult/:exam_id', authenticateStudent, (req:Request,res:Response) =>{
+    generateresult(req,res);
+})
+
+router.get('/getresult/:exam_id', authenticateStudent, (req: any, res: any) => {
+    getresult(req, res);
 });
 
 export default router;

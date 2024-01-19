@@ -1,4 +1,4 @@
-import { QuestionSchema } from './questionSchema';
+import { QuestionSchema } from './question';
 import mongoose from 'mongoose';
 
 export const examSchema = new mongoose.Schema({
@@ -8,8 +8,12 @@ export const examSchema = new mongoose.Schema({
         required:true
     },
     totalMarks :{
-        type:String,
+        type:Number,
         required: true
+    },
+    duration:{
+        type:Number,
+        required:true
     }
 })
 
